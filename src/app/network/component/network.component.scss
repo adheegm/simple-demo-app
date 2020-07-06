@@ -1,0 +1,120 @@
+.network {
+  &-table {
+    &-context {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      margin: 0 auto;
+      overflow: hidden;
+      width: 1000px;
+      .network-table-title {
+        padding: 16px 8px;
+
+        .emblem-recent {
+          background: url(/assets/svg/recent.svg) no-repeat center;
+          display: inline-block;
+          height: 16px;
+          margin-right: 8px;
+          width: 16px;
+        }
+      }
+      .network-table-header {
+        background-color: hsla(0, 0%, 85.9%, 0.2);
+        font-weight: 300;
+        .table-column {
+          padding: 10px 8px;
+        }
+      }
+      .table-column {
+        display: inline-block;
+        &.network-column {
+          &-id {
+            width: 80px;
+          }
+          &-time {
+            width: 180px;
+          }
+          &-type {
+            width: 200px;
+            span {
+              border-radius: 16px;
+              padding: 4px 8px;
+              &.transaction {
+                background-color: hsla(134, 61%, 41%, 0.5);
+              }
+              &.bake {
+                background-color: hsla(202, 83%, 62%, 0.5);
+              }
+              &.delegation {
+                background-color: hsla(0, 93%, 71%, 0.5);
+              }
+              &.activate_account {
+                background-color: hsla(213, 19%, 35%, 0.5);
+              }
+              &.double_baking_evidence {
+                background-color: hsla(9, 69%, 78%, 0.5);
+              }
+              &.double_endorsement_evidence {
+                background-color: hsla(134, 14%, 57%, 0.5);
+              }
+              &.seed_nonce_revelation {
+                background-color: hsla(281, 62%, 77%, 0.5);
+              }
+              &.origination {
+                background-color: hsla(300, 84%, 65%, 0.5);
+              }
+              &.reveal {
+                background-color: hsla(0, 82%, 74%, 0.5);
+              }
+              &.endorsement {
+                background-color: hsla(286, 74%, 82%, 0.5);
+              }
+              &.proposals {
+                background-color: hsla(133, 11%, 33%, 0.5);
+              }
+              &.ballot {
+                background-color: hsla(134, 9%, 62%, 0.5);
+              }
+              &.seed_slash {
+                background-color: hsla(76, 64%, 78%, 0.5);
+              }
+              &.unfreeze {
+                background-color: hsla(0, 83%, 72%, 0.5);
+              }
+              &.airdrop {
+                background-color: hsla(0, 42%, 74%, 0.5);
+              }
+              &.invoice {
+                background-color: hsla(245, 26%, 51%, 0.5);
+              }
+            }
+          }
+          &-sender {
+            width: 400px;
+          }
+          &-volume {
+            width: 120px;
+          }
+        }
+      }
+    }
+    &-items {
+      cdk-virtual-scroll-viewport {
+        height: 500px;
+        width: 100%;
+        .table-row {
+          cursor: pointer;
+          font-weight: normal;
+          height: 50px;
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+          .table-column {
+            padding: 16px 8px;
+          }
+        }
+      }
+    }
+  }
+}

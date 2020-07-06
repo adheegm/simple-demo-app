@@ -1,0 +1,34 @@
+<div class="network-page">
+  <div class="network-table">
+    <div class="network-table-context">
+      <div class="network-table-title">
+        <i class="emblem-recent"></i>
+        <span>Recent transaction</span>
+      </div>
+      <div class="network-table-header table-row">
+        <div class="table-column network-column-type">Type</div>
+        <div class="table-column network-column-time">Time</div>
+        <div class="table-column network-column-sender">Sender</div>
+        <div class="table-column network-column-volume">Volume</div>
+      </div>
+      <div class="network-table-items">
+        <cdk-virtual-scroll-viewport [itemSize]="50">
+          <div *cdkVirtualFor="let network of networkList" class="table-row">
+            <div class="table-column network-column-type">
+              <span [ngClass]="network.type">{{network.type}}</span>
+            </div>
+            <div class="table-column network-column-time">
+              <span>{{network.time | date: 'MMM dd yyyy, hh:mm'}}</span>
+            </div>
+            <div class="table-column network-column-sender">
+              <span>{{network.sender || '-'}}</span>
+            </div>
+            <div class="table-column network-column-volume">
+              <span>{{network.volume || 0}}</span>
+            </div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+  </div>
+</div>
