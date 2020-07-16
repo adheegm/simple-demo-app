@@ -3,7 +3,7 @@ import NetworkState from '../network.state';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, Subscription } from 'rxjs';
 import * as fromNetwork from '../network.action';
-import { map, takeUntil, delay } from 'rxjs/operators';
+import { map, takeUntil, delay, catchError } from 'rxjs/operators';
 import Network from '../network.model';
 import { HttpParams } from '@angular/common/http';
 
@@ -25,17 +25,18 @@ export class NetworkComponent implements OnInit, OnDestroy {
     order: 'desc'
   };
 
+  loading = false;
+  allDataLoaded = false;
+
   constructor(private store: Store<{ networks: NetworkState }>) {
     this.networks$ = store.pipe(select('networks'));
-  }
-
-  ngOnInit() {
     this.networkSubscription = this.networks$
       .pipe(
         delay(100),
         takeUntil(this.onDestroy$),
         map(data => {
           if (data.networks && !data.networks.length) {
+            this.allDataLoaded = true;
             this.networkSubscription.unsubscribe();
           }
           this.networkList = [...this.networkList, ...data.networks || []];
@@ -45,14 +46,39 @@ export class NetworkComponent implements OnInit, OnDestroy {
           } else {
             this.params = { ...this.params };
           }
-          this.store.dispatch(fromNetwork.GetNetworkAction({ payload: new HttpParams({ fromObject:  this.params }) }));
-        })
+          this.loading = false;
+        }),
+        catchError(async (err) => this.loading = false)
       )
       .subscribe();
+  }
+
+  ngOnInit() {
+    this.fetchNextData();
   }
 
   ngOnDestroy() {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  fetchNextData() {
+    this.loading = true;
+    this.store.dispatch(fromNetwork.GetNetworkAction({ payload: new HttpParams({ fromObject: this.params }) }));
+  }
+
+  onScroll(e: any) {
+    if (this.loading || this.allDataLoaded || (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight > 40)) {
+      return;
+    }
+    this.fetchNextData();
+  }
+
+  getFirstChars(text: string) {
+    return text.substr(0, 20);
+  }
+
+  getLastChars(text: string) {
+    return text.substr(text.length - 10, text.length);
   }
 }

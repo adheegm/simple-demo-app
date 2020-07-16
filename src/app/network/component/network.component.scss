@@ -2,13 +2,14 @@
   &-table {
     &-context {
       background-color: #fff;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #eee;
       border-radius: 8px;
       margin: 0 auto;
       overflow: hidden;
-      width: 1000px;
+      width: 660px;
       .network-table-title {
-        padding: 16px 8px;
+        color: #070707;
+        padding: 1rem 1.5rem;
 
         .emblem-recent {
           background: url(/assets/svg/recent.svg) no-repeat center;
@@ -20,27 +21,35 @@
       }
       .network-table-header {
         background-color: hsla(0, 0%, 85.9%, 0.2);
-        font-weight: 300;
+        color: #87909d;
         .table-column {
-          padding: 10px 8px;
+          padding: 0.625rem 1.5rem;
         }
       }
       .table-column {
         display: inline-block;
+        .cell-content {
+          display: inline-flex;
+        }
         &.network-column {
           &-id {
             width: 80px;
           }
           &-time {
-            width: 180px;
+            width: 165px;
           }
           &-type {
-            width: 200px;
+            width: 120px;
             span {
               border-radius: 16px;
+              display: inline-block;
+              max-width: 6rem;
               padding: 4px 8px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
               &.transaction {
-                background-color: hsla(134, 61%, 41%, 0.5);
+                background-color: hsla(134, 61%, 41%, 0.5)
               }
               &.bake {
                 background-color: hsla(202, 83%, 62%, 0.5);
@@ -90,7 +99,21 @@
             }
           }
           &-sender {
-            width: 400px;
+            width: 190px;
+            span {
+              display: inline-block;
+              white-space: nowrap;
+              overflow: hidden;
+              &:first-child {
+                text-overflow: ellipsis;
+                width: 4rem;
+              }
+              span + span {
+                direction: rtl;
+                text-align: right;
+                width: 3rem;
+              }
+            }
           }
           &-volume {
             width: 120px;
@@ -100,7 +123,7 @@
     }
     &-items {
       cdk-virtual-scroll-viewport {
-        height: 500px;
+        height: 274px;
         width: 100%;
         .table-row {
           cursor: pointer;
@@ -111,7 +134,7 @@
             opacity: 1;
           }
           .table-column {
-            padding: 16px 8px;
+            padding: 1.5rem;
           }
         }
       }

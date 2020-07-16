@@ -1,11 +1,19 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
-  navigateTo(): Promise<unknown> {
-    return browser.get(browser.baseUrl) as Promise<unknown>;
+  navigateTo() {
+    return browser.get(browser.baseUrl);
   }
 
-  getTitleText(): Promise<string> {
-    return element(by.css('app-root app-network .network-table-title span')).getText() as Promise<string>;
+  getTitleText() {
+    return element(by.css('app-root app-network .network-table-title span')).getText();
+  }
+
+  getCdkVirtualScrollElement() {
+    return element(by.tagName('cdk-virtual-scroll-viewport'));
+  }
+
+  getTableTotalElements() {
+    return element.all(by.css('.network-table-items .table-row'));
   }
 }

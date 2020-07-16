@@ -12,19 +12,28 @@
         <div class="table-column network-column-volume">Volume</div>
       </div>
       <div class="network-table-items">
-        <cdk-virtual-scroll-viewport [itemSize]="50">
+        <cdk-virtual-scroll-viewport [itemSize]="50" (scroll)="onScroll($event)">
           <div *cdkVirtualFor="let network of networkList" class="table-row">
             <div class="table-column network-column-type">
-              <span [ngClass]="network.type">{{network.type}}</span>
+              <div class="cell-content">
+                <span [ngClass]="network.type">{{network.type}}</span>
+              </div>
             </div>
             <div class="table-column network-column-time">
-              <span>{{network.time | date: 'MMM dd yyyy, hh:mm'}}</span>
+              <div class="cell-content">
+                <span>{{network.time | date: 'MMM dd yyyy, hh:mm'}}</span>
+              </div>
             </div>
             <div class="table-column network-column-sender">
-              <span>{{network.sender || '-'}}</span>
+              <div class="cell-content">
+                <span>{{getFirstChars(network.sender)}}</span>
+                <span>{{getLastChars(network.sender)}}</span>
+              </div>
             </div>
             <div class="table-column network-column-volume">
-              <span>{{network.volume || 0}}</span>
+              <div class="cell-content">
+                <span>{{network.volume || 0}}</span>
+              </div>
             </div>
           </div>
         </cdk-virtual-scroll-viewport>

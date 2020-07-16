@@ -8,16 +8,18 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display Recent transactions', () => {
+  it('page title should be Recent transactions', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual('Recent transaction');
   });
 
-  afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
+  it('should have cdkVirtualScrollViewport', () => {
+    page.navigateTo();
+    expect(page.getTableTotalElements()).toBeTruthy();
+  });
+
+  it('total element on table should be 10', () => {
+    page.navigateTo();
+    expect(page.getTableTotalElements().count()).toEqual(10);
   });
 });
