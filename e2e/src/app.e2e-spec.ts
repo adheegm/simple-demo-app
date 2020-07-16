@@ -1,7 +1,6 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Simple demo app Network page', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -15,7 +14,7 @@ describe('workspace-project App', () => {
 
   it('should have cdkVirtualScrollViewport', () => {
     page.navigateTo();
-    expect(page.getTableTotalElements()).toBeTruthy();
+    expect(page.getCdkVirtualScrollElement()).toBeTruthy();
   });
 
   it('total element on table should be 10', () => {
